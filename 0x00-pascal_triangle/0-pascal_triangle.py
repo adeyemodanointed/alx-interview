@@ -2,6 +2,7 @@
 from math import factorial
 """Function to generate pascal triangle"""
 
+
 def pascal_triangle(n):
     our_list = []
     for i in range(n):
