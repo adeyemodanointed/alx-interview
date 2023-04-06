@@ -8,7 +8,7 @@ def canUnlockAll(boxes):
     s_boxes = set([0])
     u_boxes = set(boxes[0]).difference(set([0]))
     while len(u_boxes) > 0:
-        boxIdx = u_boxes.pop()
+        box_idx = u_boxes.pop()
         if not box_idx or box_idx >= n or box_idx < 0:
             continue
         if box_idx not in s_boxes:
