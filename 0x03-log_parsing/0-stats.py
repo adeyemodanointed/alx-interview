@@ -2,7 +2,7 @@
 """Log parsing Task"""
 import sys
 import re
-# from dateutil import parser
+
 
 if __name__ == "__main__":
     value_dict = {}
@@ -68,3 +68,4 @@ if __name__ == "__main__":
                     print_result()
     except KeyboardInterrupt as e:
         print_result()
+        raise
