@@ -66,6 +66,5 @@ if __name__ == "__main__":
                 if (count == 10):
                     count = 0
                     print_result()
-    except KeyboardInterrupt as e:
+    except (KeyboardInterrupt, EOFError):
         print_result()
-        raise
