@@ -66,6 +66,6 @@ if __name__ == "__main__":
                 if (count == 10):
                     count = 0
                     print_result()
-                print_result()
+        print_result()
     except (KeyboardInterrupt, EOFError):
         print_result()
