@@ -12,25 +12,6 @@ if __name__ == "__main__":
     def check_pattern(pattern):
         """Check that pattern matches"""
         status_list = [200, 301, 400, 401, 403, 404, 405, 500]
-        #split_list = re.split('-| - ', pattern)
-        #ip = split_list[0]
-
-        # Checks for IP address
-        #match = re.match(
-               # r"^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$", ip)
-        #if (not bool(match)):
-         #   print("ip", ip)
-          #  return False
-
-        # Check for date formating
-        #split_list = split_list[1].split("] ")
-        #date = split_list[0].replace('[', '')
-
-        # Check if constant is available
-        #split_list = split_list[1].split('" ')
-       # if (split_list[0] != '"GET /projects/260 HTTP/1.1'):
-        #    return False
-
         split_list = pattern.split(" ")
 
         # Check if size and codes fit values
@@ -38,9 +19,9 @@ if __name__ == "__main__":
             size = split_list[-1]
             code = split_list[-2]
             if (int(code) not in status_list):
-                return False
+                code = 0
         except (ValueError, IndexError):
-            return False
+            code = 0
 
         # Check for integer value of size
         try:
@@ -60,10 +41,12 @@ if __name__ == "__main__":
     try:
         for line in sys.stdin:
             result = check_pattern(line)
-            if (result is not False):
+            if (result is not False and result[0] == 0):
+                file_size += result[1]
+            elif (result is not False and result[0] != 0):
                 count = count + 1
                 value_dict[result[0]] = value_dict.get(result[0], 0) + 1
-                file_size = file_size + result[1]
+                file_size += result[1]
                 if (count == 10):
                     count = 0
                     print_result()
