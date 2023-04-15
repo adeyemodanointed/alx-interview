@@ -12,33 +12,34 @@ if __name__ == "__main__":
     def check_pattern(pattern):
         """Check that pattern matches"""
         status_list = [200, 301, 400, 401, 403, 404, 405, 500]
-        split_list = pattern.split(" - ")
-        ip = split_list[0]
+        #split_list = re.split('-| - ', pattern)
+        #ip = split_list[0]
 
         # Checks for IP address
-        match = re.match(
-                r"^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$", ip)
-        if (not bool(match)):
-            return False
+        #match = re.match(
+               # r"^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$", ip)
+        #if (not bool(match)):
+         #   print("ip", ip)
+          #  return False
 
         # Check for date formating
-        split_list = split_list[1].split("] ")
-        date = split_list[0].replace('[', '')
+        #split_list = split_list[1].split("] ")
+        #date = split_list[0].replace('[', '')
 
         # Check if constant is available
-        split_list = split_list[1].split('" ')
-        if (split_list[0] != '"GET /projects/260 HTTP/1.1'):
-            return False
+        #split_list = split_list[1].split('" ')
+       # if (split_list[0] != '"GET /projects/260 HTTP/1.1'):
+        #    return False
 
-        split_list = split_list[1].split(" ")
-        code = split_list[0]
-        size = split_list[1]
+        split_list = pattern.split(" ")
 
-        # Check for integer value of code and in status list
+        # Check if size and codes fit values
         try:
-            if (int(code) not in status_list or len(split_list) != 2):
+            size = split_list[-1]
+            code = split_list[-2]
+            if (int(code) not in status_list):
                 return False
-        except ValueError:
+        except (ValueError, IndexError):
             return False
 
         # Check for integer value of size
@@ -66,6 +67,8 @@ if __name__ == "__main__":
                 if (count == 10):
                     count = 0
                     print_result()
+            else:
+                pass
         print_result()
     except (KeyboardInterrupt, EOFError):
         print_result()
