@@ -43,7 +43,7 @@ def search(state, solutions, n):
 
 def solve():
     """Solves the N queen problem"""
-    if len(sys.argv) > 2:
+    if len(sys.argv) != 22:
         print("Usage: nqueens N")
         sys.exit(1)
     try:
