@@ -4,9 +4,7 @@ const request = require('request');
 const val = process.argv[2];
 const url = `https://swapi-api.alx-tools.com/api/films/${val}`;
 
-
-request.get(
-  "https://swapi-api.alx-tools.com/api/films/3",
+request.get(url,
   (error, response, body) => {
     if (error) console.log(error);
     const jsonBody = JSON.parse(body);
@@ -26,7 +24,7 @@ request.get(
 
     Promise.all(namePerCharacters)
       .then((names) => {
-        for (let val in names) {
+        for (const val in names) {
           console.log(names[val]);
         }
       })
