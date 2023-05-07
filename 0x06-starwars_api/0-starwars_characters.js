@@ -2,29 +2,34 @@
 const request = require('request');
 
 const val = process.argv[2];
-console.log(val);
 const url = `https://swapi-api.alx-tools.com/api/films/${val}`;
 
-const myPromise = new Promise((resolve, reject) => {
-request(url, (error, response, body) => {
-  if (error) return;
-  const resp = JSON.parse(body).characters;
-  const finalResp = [];
-  for (let i = 0; i < resp.length; i++) {
-new Promise((resolve, reject) => {    
-request(resp[i], (error, response, body) => {
-console.log(resp[i])
-      if (error) return;
 
-      finalResp[i] = (JSON.parse(body).name);
-});
-}).then(resp => {return})
+request.get(
+  "https://swapi-api.alx-tools.com/api/films/3",
+  (error, response, body) => {
+    if (error) console.log(error);
+    const jsonBody = JSON.parse(body);
+    const characters = jsonBody.characters;
+
+    const namePerCharacters = characters.map(
+      (url) =>
+        new Promise((resolve, reject) => {
+          request(url, (pError, pResp, pBody) => {
+            if (pError) {
+              reject(pError);
+            }
+            resolve(JSON.parse(pBody).name);
+          });
+        })
+    );
+
+    Promise.all(namePerCharacters)
+      .then((names) => {
+        for (let val in names) {
+          console.log(names[val]);
+        }
+      })
+      .catch((err) => console.log(err));
   }
-
-  resolve(finalResp)
-});
-})
-myPromise.then((resp) => {
-console.log(resp)
-})
-
+);
