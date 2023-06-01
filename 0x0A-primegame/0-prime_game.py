@@ -15,5 +15,7 @@ def isWinner(x, nums):
             maria += 1
     if ben > maria:
         return 'Ben'
-    else:
+    elif maria > ben:
         return 'Maria'
+    else:
+        return None
