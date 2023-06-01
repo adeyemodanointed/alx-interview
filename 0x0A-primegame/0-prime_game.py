@@ -4,9 +4,6 @@
 
 def isWinner(x, nums):
     """Check who is the winner of the prime game"""
-    if (x == 0 or len(nums) == 0 or x is None
-            or nums is None or type(nums) != list):
-        return None
     ben = 0
     maria = 0
 
