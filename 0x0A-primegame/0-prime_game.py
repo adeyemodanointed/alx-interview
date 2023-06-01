@@ -8,6 +8,11 @@ def isWinner(x, nums):
         return None
     ben = 0
     maria = 0
+
+    # Based on pattern discovered, ben always wins at a step of 3
+    # Then wins the next which is 4.
+    # Then the pattern repeats itself.
+
     for i in range(x):
         if nums[i] == 1:
             ben += 1
